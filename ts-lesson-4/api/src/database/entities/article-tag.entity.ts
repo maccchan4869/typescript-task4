@@ -11,14 +11,14 @@ export class ArticleTag extends BaseEntity {
   articleId!: number;
 
   @ManyToOne(() => Article, article => article.id)
-  @JoinColumn({ name: 'id' })
+  @JoinColumn({ name: 'article_id' })
   readonly Article!: Article;
 
   @Column('tinyint', { name: 'tag_id'})
   tagId!: number;
 
   @ManyToOne(() => Tag, tag => tag.id)
-  @JoinColumn({ name: 'id' })
+  @JoinColumn({ name: 'tag_id' })
   readonly Tag!: Tag;
 
   @CreateDateColumn({ name: 'created_at' })

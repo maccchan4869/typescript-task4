@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { ArticleTag } from './article-tag.entity';
 
 @Entity({ name: 'tags' })
@@ -7,6 +7,7 @@ export class Tag extends BaseEntity {
   id!: number;
 
   @OneToMany(() => ArticleTag, articleTag => articleTag.tagId)
+  @JoinColumn({ name: 'id' })
   articles!: ArticleTag[];
 
   @Column('varchar', { name: 'name', length: 255 })

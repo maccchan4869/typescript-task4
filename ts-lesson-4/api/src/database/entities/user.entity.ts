@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Article } from './article.entity';
 
 @Entity({ name: 'users' })
@@ -7,6 +7,7 @@ export class User extends BaseEntity {
   id!: string;
 
   @OneToMany(() => Article, article => article.userId)
+  @JoinColumn({ name: 'id' })
   articles!: Article[];
 
   @Column('varchar', { name: 'title', length: 255 })

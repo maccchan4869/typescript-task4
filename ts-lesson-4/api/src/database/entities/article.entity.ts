@@ -8,14 +8,14 @@ export class Article extends BaseEntity {
   id!: number;
 
   @OneToMany(() => ArticleTag, articleTag => articleTag.articleId)
-  @JoinColumn({ name: 'articleId' })
+  @JoinColumn({ name: 'id' })
   readonly articleTag!: ArticleTag[];
 
   @Column('varchar', { name: 'user_id', length: 255 })
   userId!: string;
 
   @ManyToOne(() => User, user => user.id)
-  @JoinColumn({ name: 'id' })
+  @JoinColumn({ name: 'user_id' })
   readonly user!: User;
 
   @Column('varchar', { name: 'title', length: 255 })
