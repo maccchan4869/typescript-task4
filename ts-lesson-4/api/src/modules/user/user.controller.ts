@@ -19,7 +19,7 @@ export class UserController {
   @Post()
   @ApiExtraModels(CreatedResponse, UserResponseDto)
   @ApiSuccessResponse(CreatedResponse, UserResponseDto)
-  async createUser(@Body() param: createUserRequestDto)  {
+  async createUser(@Body() param: createUserRequestDto): Promise<CommonResponse> {
     let responseData: UserResponseDto;
 
     responseData = await this._userService.createUser(param);
@@ -41,7 +41,7 @@ export class UserController {
   @Get(':userId')
   @ApiExtraModels(OkResponse, UserResponseDto)
   @ApiSuccessResponse(OkResponse, UserResponseDto)
-  async getUser(@Param('userId') userId: string) {
+  async getUser(@Param('userId') userId: string): Promise<CommonResponse> {
     let responseData: UserResponseDto;
 
     responseData = await this._userService.findUser(userId);
@@ -55,7 +55,7 @@ export class UserController {
   async updateUser(
     @Param('userId') userId: string,
     @Body() param: updateUserRequestDto
-  ) {
+  ): Promise<CommonResponse> {
     let responseData: UserResponseDto;
 
     responseData = await this._userService.updateUser(userId, param);
