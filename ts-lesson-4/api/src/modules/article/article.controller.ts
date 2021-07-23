@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { ApiExtraModels, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
-import { ApiErrorResponse } from 'src/common/decoraters';
+import { ApiErrorResponse, ApiSuccessResponse } from 'src/common/decoraters';
 import { CommonResponse, CreatedResponse, NotFoundResponse, OkResponse, UnAuthorizedResponse } from 'src/common/types/response';
 import { ArticleTag } from 'src/database/entities/article-tag.entity';
 import { DeleteResult } from 'typeorm';
@@ -21,6 +21,8 @@ export class ArticleController {
   constructor(private readonly _articleService: ArticleService) {}
   
   @Post()
+  @ApiExtraModels(CreatedResponse, ArticleResponseDto)
+  @ApiSuccessResponse(CreatedResponse, ArticleResponseDto)
   async createArticle(@Body() param: createArticleRequestDto): Promise<CommonResponse> {
     let responseData: ArticleResponseDto;
 
@@ -30,6 +32,8 @@ export class ArticleController {
   }
 
   @Get()
+  @ApiExtraModels(OkResponse, ArticlesResponseDto)
+  @ApiSuccessResponse(OkResponse, ArticlesResponseDto)
   async getArticles(): Promise<CommonResponse> {
     let responseData: ArticlesResponseDto;
 
@@ -39,6 +43,8 @@ export class ArticleController {
   }
 
   @Get(':articleId')
+  @ApiExtraModels(OkResponse, ArticleTagsResponseDto)
+  @ApiSuccessResponse(OkResponse, ArticleTagsResponseDto)
   async findArticle(@Param('articleId') articleId: number): Promise<CommonResponse> {
     let responseData: ArticleTagsResponseDto;
     
@@ -48,6 +54,8 @@ export class ArticleController {
   }
 
   @Put(':articleId')
+  @ApiExtraModels(OkResponse, ArticleResponseDto)
+  @ApiSuccessResponse(OkResponse, ArticleResponseDto)
   async updateArticle(
     @Param('articleId') articleId: number,
     @Body() param: updateArticleRequestDto
@@ -60,6 +68,8 @@ export class ArticleController {
   }
 
   @Delete(':articleId')
+  @ApiExtraModels(OkResponse, DeleteResult)
+  @ApiSuccessResponse(OkResponse, DeleteResult)
   async deleteArticle(@Param('articleId') articleId: number): Promise<CommonResponse> {
     let responseData: DeleteResult;
     
@@ -69,6 +79,8 @@ export class ArticleController {
   }
 
   @Post('tags')
+  @ApiExtraModels(OkResponse, ArticleTagResponseDto)
+  @ApiSuccessResponse(OkResponse, ArticleTagResponseDto)
   async joinTag(@Body() param: createArticleTagRequestDto): Promise<CommonResponse> {
     let responseData: ArticleTagResponseDto;
 
@@ -78,6 +90,8 @@ export class ArticleController {
   }
 
   @Delete(':articleId/tags/:tagId')
+  @ApiExtraModels(OkResponse, DeleteResult)
+  @ApiSuccessResponse(OkResponse, DeleteResult)
   async releaseTag(
     @Param('article') articleId: number,
     @Param('tagId') tagId: number

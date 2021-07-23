@@ -13,6 +13,7 @@ import { ArticleTagsResponseDto } from './dto/articleTags.response.dto';
 import { createArticleRequestDto } from './dto/create-article.request.dto';
 import { updateArticleRequestDto } from './dto/update-article.request.dto';
 import { IArticleService } from './interface/article.service.interface';
+import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class ArticleService implements IArticleService {
@@ -100,13 +101,13 @@ export class ArticleService implements IArticleService {
   }
 
   //articleに紐づくタグ削除処理
-  async releaseTag(articleId: number, tagId: number) {
+  async releaseTag(articleId: number, tagId: number): Promise<DeleteResult> {
     const result = await this._articleTagRepository.delete({ articleId: articleId, tagId: tagId});
 
     return result;
   }
 
-  async deleteArticle(articleId: number) {
+  async deleteArticle(articleId: number): Promise<DeleteResult> {
     const deleteArticleTag = await this._articleTagRepository.delete({ articleId: articleId });
 
     const result = await this._articleRepository.delete(articleId);

@@ -17,6 +17,8 @@ export class UserController {
   constructor(private readonly _userService: UserService) {}
   
   @Post()
+  @ApiExtraModels(CreatedResponse, UserResponseDto)
+  @ApiSuccessResponse(CreatedResponse, UserResponseDto)
   async createUser(@Body() param: createUserRequestDto)  {
     let responseData: UserResponseDto;
 
@@ -26,6 +28,8 @@ export class UserController {
   }
 
   @Get()
+  @ApiExtraModels(OkResponse, UsersResponseDto)
+  @ApiSuccessResponse(OkResponse, UsersResponseDto)
   async getUsers(): Promise<CommonResponse> {
     let responseData: UsersResponseDto;
 
@@ -35,6 +39,8 @@ export class UserController {
   }
 
   @Get(':userId')
+  @ApiExtraModels(OkResponse, UserResponseDto)
+  @ApiSuccessResponse(OkResponse, UserResponseDto)
   async getUser(@Param('userId') userId: string) {
     let responseData: UserResponseDto;
 
@@ -44,6 +50,8 @@ export class UserController {
   }
 
   @Put(':userId')
+  @ApiExtraModels(OkResponse, UserResponseDto)
+  @ApiSuccessResponse(OkResponse, UserResponseDto)
   async updateUser(
     @Param('userId') userId: string,
     @Body() param: updateUserRequestDto

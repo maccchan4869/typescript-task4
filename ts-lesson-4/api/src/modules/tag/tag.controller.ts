@@ -1,8 +1,7 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { ApiExtraModels, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { ApiErrorResponse, ApiSuccessResponse } from 'src/common/decoraters';
-import { CommonResponse, CreatedResponse, DeletedResult, NotFoundResponse, OkResponse, UnAuthorizedResponse } from 'src/common/types/response';
-import { TagRepository } from 'src/ripositories/tag.repository';
+import { CreatedResponse, NotFoundResponse, OkResponse, UnAuthorizedResponse } from 'src/common/types/response';
 import { DeleteResult } from 'typeorm';
 import { createTagRequestDto } from './dto/create-tag.request.dto';
 import { TagResponseDto } from './dto/tag.response.dto';
@@ -19,6 +18,8 @@ export class TagController {
   constructor(private readonly _tagService: TagService) {}
   
   @Post()
+  @ApiExtraModels(CreatedResponse, TagResponseDto)
+  @ApiSuccessResponse(CreatedResponse, TagResponseDto)
   async createTag(@Body() param: createTagRequestDto) {
     let responseData: TagResponseDto;
 
@@ -28,6 +29,8 @@ export class TagController {
   }
 
   @Get()
+  @ApiExtraModels(OkResponse, TagsResponseDto)
+  @ApiSuccessResponse(OkResponse, TagsResponseDto)
   async getTags() {
     let responseData: TagsResponseDto;
 
@@ -37,6 +40,8 @@ export class TagController {
   }
 
   @Get(':tagId')
+  @ApiExtraModels(OkResponse, TagResponseDto)
+  @ApiSuccessResponse(OkResponse, TagResponseDto)
   async getTag(@Param('tagId') tagId: number) {
     let responseData: TagResponseDto;
 
@@ -46,6 +51,8 @@ export class TagController {
   }
 
   @Put(':tagId')
+  @ApiExtraModels(OkResponse, TagResponseDto)
+  @ApiSuccessResponse(OkResponse, TagResponseDto)
   async updateTag(
     @Param('tagId') tagId: number,
     @Body() param: updateTagRequestDto
@@ -58,6 +65,8 @@ export class TagController {
   }
 
   @Delete(':tagId')
+  @ApiExtraModels(OkResponse, DeleteResult)
+  @ApiSuccessResponse(OkResponse, DeleteResult)
   async deleteTag(@Param('tagId') tagId: number) {
     let responseData: DeleteResult;
 
