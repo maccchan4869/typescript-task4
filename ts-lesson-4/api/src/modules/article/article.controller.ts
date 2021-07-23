@@ -94,7 +94,7 @@ export class ArticleController {
   @ApiExtraModels(OkResponse, DeleteResult)
   @ApiSuccessResponse(OkResponse, DeleteResult)
   async releaseTag(
-    @Param('article') articleId: number,
+    @Param('articleId') articleId: number,
     @Param('tagId') tagId: number
   ): Promise<CommonResponse> {
     let responseData: DeleteResult;
