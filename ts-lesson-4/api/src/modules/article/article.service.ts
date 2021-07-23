@@ -5,7 +5,7 @@ import { Tag } from 'src/database/entities/tag.entity';
 import { ArticleTagRepository } from 'src/ripositories/article-tag.repository';
 import { ArticleRepository } from 'src/ripositories/article.repository';
 import { TagRepository } from 'src/ripositories/tag.repository';
-import { updateArticleTagRequestDto } from './dto/a.dto';
+import { createArticleTagRequestDto } from './dto/create-articleTag.request.dto';
 import { ArticleResponseDto } from './dto/article.response.dto';
 import { ArticlesResponseDto } from './dto/articles.response.dto';
 import { ArticleTagResponseDto } from './dto/articleTag.response';
@@ -34,7 +34,7 @@ export class ArticleService implements IArticleService {
   }
 
   //tagの登録処理
-  async joinTag(param: updateArticleTagRequestDto): Promise<ArticleTagResponseDto> {
+  async joinTag(param: createArticleTagRequestDto): Promise<ArticleTagResponseDto> {
     const newArticleTag = new ArticleTag();
     const newArticleTagParam = this._articleTagRepository.create({
       ...newArticleTag,

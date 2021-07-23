@@ -5,7 +5,7 @@ import { CommonResponse, CreatedResponse, NotFoundResponse, OkResponse, UnAuthor
 import { ArticleTag } from 'src/database/entities/article-tag.entity';
 import { DeleteResult } from 'typeorm';
 import { ArticleService } from './article.service';
-import { updateArticleTagRequestDto } from './dto/a.dto';
+import { createArticleTagRequestDto } from './dto/create-articleTag.request.dto';
 import { ArticleResponseDto } from './dto/article.response.dto';
 import { ArticlesResponseDto } from './dto/articles.response.dto';
 import { ArticleTagResponseDto } from './dto/articleTag.response';
@@ -69,7 +69,7 @@ export class ArticleController {
   }
 
   @Post('tags')
-  async joinTag(@Body() param: updateArticleTagRequestDto): Promise<CommonResponse> {
+  async joinTag(@Body() param: createArticleTagRequestDto): Promise<CommonResponse> {
     let responseData: ArticleTagResponseDto;
 
     responseData = await this._articleService.joinTag(param);

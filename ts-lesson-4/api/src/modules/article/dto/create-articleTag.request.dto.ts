@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-export class updateArticleTagRequestDto {
+export class createArticleTagRequestDto {
+  @ApiProperty()
+  articleId: number;
+
   @ApiProperty()
   tagId: number;
 }
