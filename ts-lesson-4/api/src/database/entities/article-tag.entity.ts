@@ -2,7 +2,7 @@ import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, On
 import { Article } from './article.entity';
 import { Tag } from './tag.entity';
 
-@Entity({ name: 'articlesTags' })
+@Entity({ name: 'articles_tags' })
 export class ArticleTag extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
