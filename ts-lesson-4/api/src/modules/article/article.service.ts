@@ -90,7 +90,7 @@ export class ArticleService implements IArticleService {
   }
 
   //article更新処理
-  async updateArticle(articleId: number, param: updateArticleRequestDto) {
+  async updateArticle(articleId: number, param: updateArticleRequestDto): Promise<ArticleResponseDto> {
     const origin = await this._articleRepository.findOne(articleId);
     if (!origin) throw new NotFoundException();
     const article = await this._articleRepository.save({
