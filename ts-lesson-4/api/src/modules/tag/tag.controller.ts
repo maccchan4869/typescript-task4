@@ -3,10 +3,9 @@ import { ApiExtraModels, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagge
 import { ApiErrorResponse, ApiSuccessResponse } from 'src/common/decoraters';
 import { CommonResponse, CreatedResponse, NotFoundResponse, OkResponse, UnAuthorizedResponse } from 'src/common/types/response';
 import { DeleteResult } from 'typeorm';
-import { createTagRequestDto } from './dto/create-tag.request.dto';
+import { TagRequestDto } from './dto/tag.request.dto';
 import { TagResponseDto } from './dto/tag.response.dto';
 import { TagsResponseDto } from './dto/tags.response.dto';
-import { updateTagRequestDto } from './dto/update-tag.request.dto';
 import { TagService } from './tag.service';
 
 @ApiTags('tags')
@@ -20,7 +19,7 @@ export class TagController {
   @Post()
   @ApiExtraModels(CreatedResponse, TagResponseDto)
   @ApiSuccessResponse(CreatedResponse, TagResponseDto)
-  async createTag(@Body() param: createTagRequestDto): Promise<CommonResponse> {
+  async createTag(@Body() param: TagRequestDto): Promise<CommonResponse> {
     let responseData: TagResponseDto;
 
     responseData = await this._tagService.createTag(param);
@@ -55,7 +54,7 @@ export class TagController {
   @ApiSuccessResponse(OkResponse, TagResponseDto)
   async updateTag(
     @Param('tagId') tagId: number,
-    @Body() param: updateTagRequestDto
+    @Body() param: TagRequestDto
   ): Promise<CommonResponse> {
     let responseData: TagResponseDto;
 

@@ -1,5 +1,5 @@
 import { DeleteResult } from 'typeorm';
-import { createTagRequestDto } from '../dto/create-tag.request.dto';
+import { createTagRequestDto } from '../dto/tag.request.dto';
 import { TagResponseDto } from '../dto/tag.response.dto';
 import { TagsResponseDto } from '../dto/tags.response.dto';
 import { updateTagRequestDto } from '../dto/update-tag.request.dto';

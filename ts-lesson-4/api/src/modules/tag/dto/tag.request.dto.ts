@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-export class createTagRequestDto {
+export class TagRequestDto {
   @ApiProperty()
   name!: string;
 }
