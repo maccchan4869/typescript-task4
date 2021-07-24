@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } fr
 import { ApiExtraModels, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { ApiErrorResponse, ApiSuccessResponse } from 'src/common/decoraters';
 import { CommonResponse, CreatedResponse, NotFoundResponse, OkResponse, UnAuthorizedResponse } from 'src/common/types/response';
-import { userRequestDto } from './dto/user.request.dto';
+import { UserRequestDto } from './dto/user.request.dto';
 import { UserResponseDto } from './dto/user.response.dto';
 import { UsersResponseDto } from './dto/users.response.dto';
 import { UserService } from './user.service';
@@ -18,7 +18,7 @@ export class UserController {
   @Post()
   @ApiExtraModels(CreatedResponse, UserResponseDto)
   @ApiSuccessResponse(CreatedResponse, UserResponseDto)
-  async createUser(@Body() param: userRequestDto): Promise<CommonResponse> {
+  async createUser(@Body() param: UserRequestDto): Promise<CommonResponse> {
     let responseData: UserResponseDto;
 
     responseData = await this._userService.createUser(param);
@@ -53,7 +53,7 @@ export class UserController {
   @ApiSuccessResponse(OkResponse, UserResponseDto)
   async updateUser(
     @Param('userId') userId: string,
-    @Body() param: userRequestDto
+    @Body() param: UserRequestDto
   ): Promise<CommonResponse> {
     let responseData: UserResponseDto;
 
