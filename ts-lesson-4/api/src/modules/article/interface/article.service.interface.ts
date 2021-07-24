@@ -1,6 +1,6 @@
 import { DeleteResult } from 'typeorm';
 import { ArticleResponseDto } from '../dto/article.response.dto';
-import { ArticlesResponseDto } from '../dto/articles.response.dto';
+import { ArticlesTagsResponseDto } from '../dto/articlesTags.response.dto';
 import { ArticleTagResponseDto } from '../dto/articleTag.response';
 import { ArticleTagsResponseDto } from '../dto/articleTags.response.dto';
 import { createArticleRequestDto } from '../dto/create-article.request.dto';
@@ -12,7 +12,7 @@ export interface IArticleService {
 
   joinTag(param: createArticleTagRequestDto): Promise<ArticleTagResponseDto>;
 
-  getArticles(): Promise<ArticlesResponseDto>;
+  getArticles(): Promise<ArticlesTagsResponseDto>;
 
   findArticle(articleId: number): Promise<ArticleTagsResponseDto>;
 

@@ -7,7 +7,7 @@ import { ArticleRepository } from 'src/ripositories/article.repository';
 import { TagRepository } from 'src/ripositories/tag.repository';
 import { createArticleTagRequestDto } from './dto/create-articleTag.request.dto';
 import { ArticleResponseDto } from './dto/article.response.dto';
-import { ArticlesResponseDto } from './dto/articles.response.dto';
+import { ArticlesTagsResponseDto } from './dto/articlesTags.response.dto';
 import { ArticleTagResponseDto } from './dto/articleTag.response';
 import { ArticleTagsResponseDto } from './dto/articleTags.response.dto';
 import { createArticleRequestDto } from './dto/create-article.request.dto';
@@ -47,7 +47,7 @@ export class ArticleService implements IArticleService {
   }
 
   //Article全件取得
-  async getArticles(): Promise<ArticlesResponseDto> {
+  async getArticles(): Promise<ArticlesTagsResponseDto> {
     const articles: ArticleTagsResponseDto[] = [];
     const articlesData = await this._articleRepository.find();
 

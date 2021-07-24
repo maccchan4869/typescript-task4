@@ -7,7 +7,7 @@ import { DeleteResult } from 'typeorm';
 import { ArticleService } from './article.service';
 import { createArticleTagRequestDto } from './dto/create-articleTag.request.dto';
 import { ArticleResponseDto } from './dto/article.response.dto';
-import { ArticlesResponseDto } from './dto/articles.response.dto';
+import { ArticlesTagsResponseDto } from './dto/articlesTags.response.dto';
 import { ArticleTagResponseDto } from './dto/articleTag.response';
 import { ArticleTagsResponseDto } from './dto/articleTags.response.dto';
 import { createArticleRequestDto } from './dto/create-article.request.dto';
@@ -33,10 +33,10 @@ export class ArticleController {
   }
 
   @Get()
-  @ApiExtraModels(OkResponse, ArticlesResponseDto)
-  @ApiSuccessResponse(OkResponse, ArticlesResponseDto)
+  @ApiExtraModels(OkResponse, ArticlesTagsResponseDto)
+  @ApiSuccessResponse(OkResponse, ArticlesTagsResponseDto)
   async getArticles(): Promise<CommonResponse> {
-    let responseData: ArticlesResponseDto;
+    let responseData: ArticlesTagsResponseDto;
 
     responseData = await this._articleService.getArticles();
 
