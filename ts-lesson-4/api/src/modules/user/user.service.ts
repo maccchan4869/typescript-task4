@@ -2,8 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { nanoid } from 'nanoid';
 import { User } from 'src/database/entities/user.entity';
 import { UserRepository } from 'src/ripositories/user.repository';
-import { createUserRequestDto } from './dto/create-user.request.dto';
-import { updateUserRequestDto } from './dto/update-user.request.dto';
+import { userRequestDto } from './dto/user.request.dto';
 import { UserResponseDto } from './dto/user.response.dto';
 import { UsersResponseDto } from './dto/users.response.dto';
 import { IUserService } from './interface/user.service.interface';
@@ -13,7 +12,7 @@ export class UserService implements IUserService {
   constructor(private readonly _userRepository: UserRepository) {}
   
   //user作成処理
-  async createUser(param: createUserRequestDto): Promise<UserResponseDto> {
+  async createUser(param: userRequestDto): Promise<UserResponseDto> {
     const newUser = new User();
     newUser.id = nanoid();
     const newUserParam = this._userRepository.create({
@@ -39,7 +38,7 @@ export class UserService implements IUserService {
   }
   
   //user更新処理
-  async updateUser(userId: string, param: updateUserRequestDto): Promise<UserResponseDto> {
+  async updateUser(userId: string, param: userRequestDto): Promise<UserResponseDto> {
     const origin = await this._userRepository.findOne(userId);
     if (!origin) throw new NotFoundException();
     const user = await this._userRepository.save({
