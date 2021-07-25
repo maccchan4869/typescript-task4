@@ -2,6 +2,9 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } fr
 import { ApiExtraModels, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { ApiErrorResponse, ApiSuccessResponse } from 'src/common/decoraters';
 import { CommonResponse, CreatedResponse, NotFoundResponse, OkResponse, UnAuthorizedResponse } from 'src/common/types/response';
+import { UserRequestDto } from './dto/user.request.dto';
+import { UserResponseDto } from './dto/user.response.dto';
+import { UsersResponseDto } from './dto/users.response.dto';
 import { UserService } from './user.service';
 
 @ApiTags('users')
@@ -10,11 +13,13 @@ import { UserService } from './user.service';
 @ApiErrorResponse(UnAuthorizedResponse)
 @ApiErrorResponse(NotFoundResponse)  
 export class UserController {
-  constructor(private readonly _userService) {}
+  constructor(private readonly _userService: UserService) {}
   
   @Post()
-  async createUser(@Body() param)  {
-    let responseData;
+  @ApiExtraModels(CreatedResponse, UserResponseDto)
+  @ApiSuccessResponse(CreatedResponse, UserResponseDto)
+  async createUser(@Body() param: UserRequestDto): Promise<CommonResponse> {
+    let responseData: UserResponseDto;
 
     responseData = await this._userService.createUser(param);
 
@@ -22,8 +27,10 @@ export class UserController {
   }
 
   @Get()
+  @ApiExtraModels(OkResponse, UsersResponseDto)
+  @ApiSuccessResponse(OkResponse, UsersResponseDto)
   async getUsers(): Promise<CommonResponse> {
-    let responseData;
+    let responseData: UsersResponseDto;
 
     responseData = await this._userService.getUsers();
 
@@ -31,8 +38,10 @@ export class UserController {
   }
 
   @Get(':userId')
-  async getUser(@Param('userId') userId) {
-    let responseData;
+  @ApiExtraModels(OkResponse, UserResponseDto)
+  @ApiSuccessResponse(OkResponse, UserResponseDto)
+  async getUser(@Param('userId') userId: string): Promise<CommonResponse> {
+    let responseData: UserResponseDto;
 
     responseData = await this._userService.findUser(userId);
 
@@ -40,11 +49,13 @@ export class UserController {
   }
 
   @Put(':userId')
+  @ApiExtraModels(OkResponse, UserResponseDto)
+  @ApiSuccessResponse(OkResponse, UserResponseDto)
   async updateUser(
-    @Param('userId') userId,
-    @Body() param
-  ) {
-    let responseData;
+    @Param('userId') userId: string,
+    @Body() param: UserRequestDto
+  ): Promise<CommonResponse> {
+    let responseData: UserResponseDto;
 
     responseData = await this._userService.updateUser(userId, param);
 
